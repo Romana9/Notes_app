@@ -4,9 +4,11 @@ import 'package:notes_app/constants.dart';
 class CustomButton extends StatelessWidget {
   const CustomButton({
     Key? key,
-   required this.onPressed,
+    required this.onPressed,
+    this.isLoading = false,
   }) : super(key: key);
   final void Function()? onPressed;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +20,20 @@ class CustomButton extends StatelessWidget {
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12)))),
         onPressed: onPressed,
-        child: const Text(
-          "ADD",
-          style: TextStyle(
-              color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
-        ));
+        child: isLoading
+            ? const SizedBox(
+              height: 24,
+              width: 24,
+              child: CircularProgressIndicator(
+                color: Colors.black,
+              ),
+            )
+            : const Text(
+                "ADD",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ));
   }
 }
